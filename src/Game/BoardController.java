@@ -7,10 +7,6 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyCodeCombination;
-import javafx.scene.input.KeyCombination;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -25,6 +21,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+
 
 
 import static Game.BoardSettingsController.Columns;
@@ -81,6 +78,7 @@ public class BoardController {
                     actual = null;
                     clickCount = 2;
                 });
+                totalClicks++;
             });
             close();
         }
@@ -106,11 +104,33 @@ public class BoardController {
             return cardID == other.cardID;
         }
     }
+    private class Timer extends Thread{
+        private int sec;
+
+        public void run(){
+            System.out.println("Timer: start work");
+            while (!isInterrupted()) {
+                try {
+                    sleep(1000);
+                    sec++;
+                } catch (InterruptedException e) {
+                    System.out.println("Timer: end work, sec - "+sec);
+                }
+            }
+        }
+
+        public int getSec() {
+            return sec;
+        }
+    }
+
 
     private Card actual = null;
+    private Timer timer = new Timer();
     private static int score = 0;
+    private int totalClicks = 0;
     private int clickCount = 2;
-    private static int pairs = (Columns * Rows) / 2;
+    private int pairs = (Columns * Rows) / 2;
     private int pairsLeft = pairs;
 
     @FXML
@@ -127,15 +147,15 @@ public class BoardController {
     }
 
     public void initialize() throws FileNotFoundException {
-        score = Rows * Columns;
-
-        boardWindow.setPrefHeight(Rows * 150);
+        boardWindow.setPrefHeight(Rows * 100);
         boardWindow.setPrefWidth(Columns * 100);
 
         ArrayList<Card> cards = new ArrayList<>();
         for (int i = 0; i < pairs; i++) {
-            cards.add(new Card("D:\\GUI_PRO2_s25134\\src\\Game\\images\\p" + (i + 1) + ".jpg", i));
-            cards.add(new Card("D:\\GUI_PRO2_s25134\\src\\Game\\images\\p" + (i + 1) + ".jpg", i));
+//            cards.add(new Card("D:\\GUI_PRO2_s25134\\src\\Game\\images\\p" + (i + 1) + ".jpg", i));
+//            cards.add(new Card("D:\\GUI_PRO2_s25134\\src\\Game\\images\\p" + (i + 1) + ".jpg", i));
+            cards.add(new Card("/Users/remmist/IdeaProjects/Memory/GUI_PRO2_s25134/src/Game/images/p" + (i + 1) + ".jpg", i));
+            cards.add(new Card("/Users/remmist/IdeaProjects/Memory/GUI_PRO2_s25134/src/Game/images/p" + (i + 1) + ".jpg", i));
         }
 
         Collections.shuffle(cards);
@@ -146,9 +166,12 @@ public class BoardController {
             card.setTranslateY(100 * (i / Rows));
             gameBoard.getChildren().add(card);
         }
+        timer.start();
     }
 
     public void endGame() throws IOException {
+        timer.interrupt();
+        score = (Rows * Columns) * (timer.getSec() / totalClicks);
         Scene menuScene = appTime.getScene();
         Stage window = (Stage) menuScene.getWindow();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("scenes/saveScore.fxml"));
@@ -156,19 +179,11 @@ public class BoardController {
         window.setScene(menuScene);
         window.setWidth(600);
         window.setHeight(400);
+        timer.stop();
     }
 
     public void exitApp() {
         Stage stage = (Stage) appTime.getScene().getWindow();
         stage.close();
-    }
-
-    public void exitWithKey(KeyEvent key) {
-        KeyCombination exitCombination = new KeyCodeCombination(KeyCode.Q, KeyCombination.CONTROL_DOWN, KeyCombination.ALT_DOWN);
-        if (exitCombination.match(key)) {
-            Stage stage = (Stage) gameBoard.getScene().getWindow();
-            stage.close();
-            System.out.println("CTRL + ALT");
-        }
     }
 }

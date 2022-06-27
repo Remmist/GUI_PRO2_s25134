@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
-<GridPane alignment="center" hgap="10" prefHeight="400.0" prefWidth="600.0" vgap="10" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Game.BoardSettingsController">
+<GridPane alignment="center" hgap="10" prefHeight="400.0" prefWidth="600.0" vgap="10" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Game.BoardSettingsController">
 
     <Label fx:id="boardWindowTitle" text="Choose board size" GridPane.halignment="CENTER" GridPane.rowIndex="0">
       <font>
@@ -12,9 +16,9 @@
       </font></Label>
 
     <GridPane alignment="CENTER" hgap="10" vgap="10" GridPane.rowIndex="1">
-        <Label text="rows:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+        <Label text="colums:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
         <TextField fx:id="rows" prefWidth="50.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-        <Label text="columns:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+        <Label text="rows:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
         <TextField fx:id="columns" prefWidth="50.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
       <columnConstraints>
          <ColumnConstraints />

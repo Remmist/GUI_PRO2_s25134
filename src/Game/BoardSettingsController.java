@@ -27,14 +27,19 @@ public class BoardSettingsController{
 
     @FXML
     private void startGame() throws IOException {
-        setSettings();
+        if(rows.getText().equals("") || columns.getText().equals("")) {
+            ExceptionInputNotNumber();
+            return;
+        }
+        Rows = Integer.parseInt(rows.getText());
+        Columns = Integer.parseInt(columns.getText());
         if ((Columns * Rows) % 2 == 0) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("scenes/board.fxml"));
             Parent root = loader.load();
             Stage window = new Stage();
             window.setScene(new Scene(root));
-            window.setMinWidth((6 * Columns) + 250);
-            window.setMinHeight((6 * Rows) + 250);
+            window.setMinWidth(250);
+            window.setMinHeight(250);
             window.show();
         } else {
             ExceptionWrongInput();
@@ -49,15 +54,6 @@ public class BoardSettingsController{
         window.setScene(menuScene);
         window.setWidth(600);
         window.setHeight(400);
-    }
-
-    public void setSettings() {
-        if(rows.getText().equals("") || columns.getText().equals("")) {
-            ExceptionInputNotNumber();
-            return;
-        }
-        Rows = Integer.parseInt(rows.getText());
-        Columns = Integer.parseInt(columns.getText());
     }
 
     public void exitApp() {
