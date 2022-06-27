@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<GridPane alignment="CENTER" hgap="10" prefHeight="200.0" prefWidth="300.0" vgap="10" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Game.ScoreSaverController">
+
+    <padding>
+        <Insets bottom="10" left="25" right="25" top="25" />
+    </padding>
+
+    <Label fx:id="title" text="Enter your name" GridPane.halignment="CENTER" GridPane.rowIndex="0">
+      <font>
+         <Font size="29.0" />
+      </font></Label>
+    <TextField fx:id="playerName" prefWidth="100" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+    <Button fx:id="saveResult" onAction="#saveResult" text="Save" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+    <Button onAction="#exitApp" text="Exit without save" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+   <columnConstraints>
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+   </rowConstraints>
+
+</GridPane>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<GridPane alignment="center" hgap="10" prefHeight="400.0" prefWidth="600.0" vgap="10" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Game.BoardSettingsController">
+
+    <Label fx:id="boardWindowTitle" text="Choose board size" GridPane.halignment="CENTER" GridPane.rowIndex="0">
+      <font>
+         <Font size="38.0" />
+      </font></Label>
+
+    <GridPane alignment="CENTER" hgap="10" vgap="10" GridPane.rowIndex="1">
+        <Label text="rows:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+        <TextField fx:id="rows" prefWidth="50.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+        <Label text="columns:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+        <TextField fx:id="columns" prefWidth="50.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      <columnConstraints>
+         <ColumnConstraints />
+         <ColumnConstraints />
+      </columnConstraints>
+      <rowConstraints>
+         <RowConstraints />
+         <RowConstraints />
+      </rowConstraints>
+    </GridPane>
+
+    <Button fx:id="startGameButton" onAction="#startGame" prefWidth="100" text="Start" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+
+    <Button fx:id="backButton" onAction="#backToMenu" prefWidth="100" text="Back" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+
+    <Button onAction="#exitApp" prefWidth="100" text="Exit" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+   <columnConstraints>
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+   </rowConstraints>
+
+</GridPane>
